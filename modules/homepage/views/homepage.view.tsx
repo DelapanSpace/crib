@@ -1,9 +1,10 @@
 import { HomeText } from "../components/home-text";
 import { WORDS } from "../utils";
+import { BackgroundLayer } from "@/components/background/background-layer";
 
 export default function HomepageView() {
   return (
-    <div className="relative w-full bg-black min-h-screen">
+    <div className="relative w-full min-h-screen">
       <section className="sr-only">
         <h1>Selected Projects & Brands</h1>
         <ul>
@@ -12,6 +13,9 @@ export default function HomepageView() {
           ))}
         </ul>
       </section>
+
+      {/* BACKGROUND */}
+      <BackgroundLayer />
 
       <div className="fixed inset-0 z-10 flex items-center pl-20 pointer-events-none">
         <div className="w-full pointer-events-auto">
