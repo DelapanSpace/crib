@@ -6,158 +6,157 @@ import { Volume2, VolumeX } from "lucide-react";
 export function SpaceAudio() {
   const [isMuted, setIsMuted] = useState(true);
   const audioContextRef = useRef<AudioContext | null>(null);
-  const droneNodeRef = useRef<AudioBufferSourceNode | null>(null);
-  const beepIntervalRef = useRef<NodeJS.Timeout | null>(null);
-  const gainNodeRef = useRef<GainNode | null>(null);
+  
+  // We track the oscillators so we can stop them cleanly
+  const nodesRef = useRef<{
+    osc1: OscillatorNode | null;
+    osc2: OscillatorNode | null;
+    gain: GainNode | null;
+  }>({ osc1: null, osc2: null, gain: null });
 
-  // Initialize Audio Context
+  // 1. Initialize Audio Context
   const initAudio = () => {
     if (!audioContextRef.current) {
-      // Cross-browser support
       const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
       audioContextRef.current = new AudioContextClass();
-      
-      // MASTER VOLUME (Boosted)
-      const ctx = audioContextRef.current;
-      const gain = ctx.createGain();
-      gain.gain.value = 0.1; // Increased from 0.4 to 0.8
-      gain.connect(ctx.destination);
-      gainNodeRef.current = gain;
     }
+    return audioContextRef.current;
   };
 
-  const createBrownNoise = (ctx: AudioContext) => {
-    const bufferSize = ctx.sampleRate * 2; // 2 seconds buffer
-    const buffer = ctx.createBuffer(1, bufferSize, ctx.sampleRate);
-    const data = buffer.getChannelData(0);
+  // 2. The TRON Drone Generator
+  const startDrone = (ctx: AudioContext) => {
+    // If already running, don't double up
+    if (nodesRef.current.osc1) return;
 
-    // Generate Brown Noise
-    let lastOut = 0;
-    for (let i = 0; i < bufferSize; i++) {
-      const white = Math.random() * 2 - 1;
-      data[i] = (lastOut + (0.02 * white)) / 1.02;
-      lastOut = data[i];
-      data[i] *= 3.5; // Gain compensation
-    }
+    const t = ctx.currentTime;
 
-    const noise = ctx.createBufferSource();
-    noise.buffer = buffer;
-    noise.loop = true;
-
-    // FILTER (Crucial Fix)
+    // --- NODES ---
+    const osc1 = ctx.createOscillator();
+    const osc2 = ctx.createOscillator();
+    const masterGain = ctx.createGain();
     const filter = ctx.createBiquadFilter();
-    filter.type = "lowpass";
-    
-    // CHANGED: 120Hz -> 600Hz 
-    // This allows the "hiss" of air to be heard on laptop speakers
-    filter.frequency.value = 600; 
+    const compressor = ctx.createDynamicsCompressor(); // Smooths out volume peaks
 
-    noise.connect(filter);
-    
-    if (gainNodeRef.current) {
-        filter.connect(gainNodeRef.current);
-    }
-    
-    return noise;
+    // --- CONNECTIONS ---
+    // Osc -> Gain -> Filter -> Compressor -> Output
+    osc1.connect(masterGain);
+    osc2.connect(masterGain);
+    masterGain.connect(filter);
+    filter.connect(compressor);
+    compressor.connect(ctx.destination);
+
+    // --- OSCILLATOR 1: The Foundation (Sub-Bass) ---
+    osc1.type = "sine"; 
+    osc1.frequency.value = 55; // 55Hz (A1) - Deep, warm bass
+
+    // --- OSCILLATOR 2: The "Electric Phase" ---
+    osc2.type = "sine";
+    // Detuning it slightly creates a "Binaural Beat" effect.
+    // 55Hz vs 55.25Hz = A slow 0.25Hz pulse (One throb every 4 seconds)
+    osc2.frequency.value = 55.25; 
+
+    // --- FILTER: The "Muffle" ---
+    // We cut everything above 120Hz so it doesn't sound digital/piercing
+    filter.type = "lowpass";
+    filter.frequency.value = 120;
+    filter.Q.value = 0; // Flat resonance
+
+    // --- VOLUME FADE IN (Elegant Entry) ---
+    masterGain.gain.setValueAtTime(0, t);
+    // Ramp up to 0.15 (Subtle background volume) over 2 seconds
+    masterGain.gain.linearRampToValueAtTime(0.15, t + 2);
+
+    // --- START ---
+    osc1.start(t);
+    osc2.start(t);
+
+    // Store refs for cleanup
+    nodesRef.current = { osc1, osc2, gain: masterGain };
   };
 
-  const playBeep = () => {
-    const ctx = audioContextRef.current;
-    if (!ctx || !gainNodeRef.current || ctx.state === "suspended") return;
+  const stopDrone = (ctx: AudioContext) => {
+    const { osc1, osc2, gain } = nodesRef.current;
+    if (!osc1 || !osc2 || !gain) return;
 
-    const osc = ctx.createOscillator();
-    const beepGain = ctx.createGain();
+    const t = ctx.currentTime;
+    
+    // Elegant Fade Out
+    gain.gain.setValueAtTime(gain.gain.value, t);
+    gain.gain.exponentialRampToValueAtTime(0.001, t + 1); // 1 second fade out
 
-    osc.type = "sine";
-    // Slightly lower pitch range to be more audible
-    osc.frequency.setValueAtTime(600 + Math.random() * 500, ctx.currentTime);
+    // Stop oscillators after fade
+    osc1.stop(t + 1);
+    osc2.stop(t + 1);
 
-    // Louder beep volume
-    beepGain.gain.setValueAtTime(0.1, ctx.currentTime); 
-    beepGain.gain.exponentialRampToValueAtTime(0.001, ctx.currentTime + 0.15);
-
-    osc.connect(beepGain);
-    beepGain.connect(gainNodeRef.current);
-
-    osc.start();
-    osc.stop(ctx.currentTime + 0.2);
+    // Clear refs
+    nodesRef.current = { osc1: null, osc2: null, gain: null };
   };
 
   const toggleAudio = async () => {
-    // 1. Initialize if missing
-    if (!audioContextRef.current) {
-      initAudio();
-    }
-
-    const ctx = audioContextRef.current;
+    const ctx = initAudio();
     if (!ctx) return;
 
-    // 2. FORCE RESUME (Browser Policy Fix)
+    // Browser Policy Fix: Always resume first
     if (ctx.state === "suspended") {
       await ctx.resume();
     }
 
     if (isMuted) {
-      // --- PLAY ---
-      
-      // Start Drone if it's not running
-      if (!droneNodeRef.current) {
-        droneNodeRef.current = createBrownNoise(ctx);
-        droneNodeRef.current.start();
-      }
-
-      // Start Telemetry Beeps
-      if (!beepIntervalRef.current) {
-        // Immediate beep to prove it works
-        playBeep(); 
-        
-        beepIntervalRef.current = setInterval(() => {
-            if (Math.random() > 0.5) { 
-                playBeep();
-            }
-        }, 1500); // More frequent for testing
-      }
-      
+      startDrone(ctx);
       setIsMuted(false);
     } else {
-      // --- MUTE ---
-      
-      // Don't close context, just stop the nodes or suspend
-      // Suspending retains the hardware link
-      await ctx.suspend();
-      
+      stopDrone(ctx);
       setIsMuted(true);
-      
-      // Clear interval
-      if (beepIntervalRef.current) {
-        clearInterval(beepIntervalRef.current);
-        beepIntervalRef.current = null;
-      }
     }
   };
 
-  // Cleanup
+  // 3. "Wake Up" Listener (The Auto-Unlock Fix)
   useEffect(() => {
-    return () => {
-      if (droneNodeRef.current) {
-        try { droneNodeRef.current.stop(); } catch(e) {}
+    const unlockAudio = () => {
+      const ctx = initAudio();
+      if (ctx && ctx.state === "suspended") {
+        ctx.resume();
       }
-      if (beepIntervalRef.current) clearInterval(beepIntervalRef.current);
-      if (audioContextRef.current) audioContextRef.current.close();
+      // Once unlocked, we don't need listeners anymore
+      document.removeEventListener("click", unlockAudio);
+      document.removeEventListener("touchstart", unlockAudio);
+      document.removeEventListener("keydown", unlockAudio);
+    };
+
+    document.addEventListener("click", unlockAudio);
+    document.addEventListener("touchstart", unlockAudio);
+    document.addEventListener("keydown", unlockAudio);
+
+    return () => {
+      document.removeEventListener("click", unlockAudio);
+      document.removeEventListener("touchstart", unlockAudio);
+      document.removeEventListener("keydown", unlockAudio);
+      
+      // Cleanup audio on unmount
+      if (nodesRef.current.osc1) {
+        try {
+          nodesRef.current.osc1.stop();
+          nodesRef.current.osc2?.stop();
+        } catch (e) {}
+      }
+      if (audioContextRef.current) {
+        audioContextRef.current.close();
+      }
     };
   }, []);
 
   return (
     <button
       onClick={toggleAudio}
-      className="fixed bottom-8 right-8 z-50 p-4 rounded-full bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-300 group cursor-pointer"
+      className="fixed z-[100] p-4 rounded-full bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-500 group cursor-pointer bottom-12 left-6 md:bottom-8 md:right-8 md:left-auto"
     >
       {isMuted ? (
         <VolumeX className="w-5 h-5 text-white/50 group-hover:text-white transition-colors" />
       ) : (
         <div className="relative">
-          <Volume2 className="w-5 h-5 text-blue-400 animate-pulse" />
-          <div className="absolute inset-0 bg-blue-500/20 blur-lg rounded-full animate-pulse" />
+          {/* Subtle Pulse Animation matches the sound */}
+          <Volume2 className="w-5 h-5 text-blue-400/80 animate-pulse duration-[4000ms]" />
+          <div className="absolute inset-0 bg-blue-500/10 blur-xl rounded-full animate-pulse duration-[4000ms]" />
         </div>
       )}
     </button>
