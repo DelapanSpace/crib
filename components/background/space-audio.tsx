@@ -148,14 +148,14 @@ export function SpaceAudio() {
   return (
     <button
       onClick={toggleAudio}
-      className="fixed z-[100] p-4 rounded-full bg-white/5 backdrop-blur-md border border-white/10 hover:bg-white/10 hover:border-white/20 transition-all duration-500 group cursor-pointer bottom-12 left-6 md:bottom-8 md:right-8 md:left-auto"
+      className="fixed z-[100] p-4 rounded-full bg-black/30 backdrop-blur-md border border-white/10 hover:bg-black/80 hover:border-white/40 transition-all duration-500 group cursor-pointer bottom-12 left-6 md:bottom-8 md:right-8 md:left-auto"
     >
       {isMuted ? (
         <VolumeX className="w-5 h-5 text-white/50 group-hover:text-white transition-colors" />
       ) : (
         <div className="relative">
           {/* Subtle Pulse Animation matches the sound */}
-          <Volume2 className="w-5 h-5 text-blue-400/80 animate-pulse duration-[4000ms]" />
+          <Volume2 className="w-5 h-5 text-white/80 animate-pulse duration-[4000ms]" />
           <div className="absolute inset-0 bg-blue-500/10 blur-xl rounded-full animate-pulse duration-[4000ms]" />
         </div>
       )}

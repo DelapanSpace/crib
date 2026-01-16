@@ -2,7 +2,7 @@
 .enhancedBackground {
   position: fixed;
   inset: 0;
-  z-index: 0;
+  z-index: -10;
   overflow: hidden;
   background-color: #030304;
   pointer-events: none;
