@@ -1,3 +1,4 @@
+import { SpaceAudio } from "@/components/background/space-audio";
 import { HomeText } from "../components/home-text";
 import { WORDS } from "../utils";
 import { BackgroundLayer } from "@/components/background/background-layer";
@@ -16,7 +17,7 @@ export default function HomepageView() {
 
       {/* BACKGROUND */}
       <BackgroundLayer />
-
+<SpaceAudio/>
       <div className="fixed inset-0 z-10 flex items-center pl-20 pointer-events-none">
         <div className="w-full pointer-events-auto">
           <div className="flex justify-start">

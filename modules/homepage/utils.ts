@@ -1,5 +1,12 @@
-//constant:
 export const WORDS = [
+  "ABOUT US",
+  "CONTACT",
+  "FREQUENTLY AQ",
+  "PROJECTS",
+  "SERVICES",
+] as const;
+
+export const PROJECTS = [
   "PRODUCT PHOTOGRAPHY",
   "ARSIPAN",
   "BERSATU",
