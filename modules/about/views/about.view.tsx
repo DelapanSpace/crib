@@ -14,7 +14,7 @@ export default async function AboutView() {
       <main className="w-full">
         {/* Hero Section */}
         <AboutHero data={data} />
-        <SpaceAudio/>
+        {/* <SpaceAudio/> */}
         {/* Content Section */}
         <AboutStory data={data} />
         <AboutProcess data={data.process}/>

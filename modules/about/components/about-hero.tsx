@@ -1,4 +1,6 @@
 import { urlFor } from "@/sanity/lib/image";
+import { ArrowLeft } from "lucide-react";
+import Link from "next/link";
 
 export function AboutHero({ data }: any) {
   const title = data?.heroTitle || "";
@@ -16,6 +18,26 @@ export function AboutHero({ data }: any) {
         {/* Overlay to ensure text readability if needed, though design is clear */}
         <div className="absolute inset-0 bg-black/20" />
       </div>
+      <Link
+        href="/"
+        aria-label="Back to home"
+        className="
+    absolute
+    top-4 left-4
+    md:top-8 md:left-8
+    z-20
+    w-10 h-10 md:w-12 md:h-12
+    rounded-full
+    border border-white/60
+    flex items-center justify-center
+    backdrop-blur-sm
+    hover:border-white
+    hover:bg-white/10
+    transition
+  "
+      >
+        <ArrowLeft className="w-5 h-5 md:w-6 md:h-6 text-white" />
+      </Link>
 
       {/* Hero Content */}
       <div className="relative z-10 w-full">

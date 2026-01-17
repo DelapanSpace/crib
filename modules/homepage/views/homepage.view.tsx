@@ -17,7 +17,7 @@ export default function HomepageView() {
 
       {/* BACKGROUND */}
       <BackgroundLayer />
-      <SpaceAudio/>
+      {/* <SpaceAudio/> */}
       <div className="fixed inset-0 z-10 flex items-center pl-6 md:pl-20 pointer-events-none">
         <div className="w-full pointer-events-auto">
           <div className="flex justify-start">
