@@ -1,10 +1,12 @@
-import { ContactGrid } from "../components/contact-grid";
 import { BackgroundLayer } from "@/components/background/background-layer";
+import { client } from "@/sanity/lib/client";
+import { contactPageQuery } from "@/sanity/queries/contactPage";
+import { ContactGrid } from "../components/contact-grid";
 
-export default function ContactView() {
+export default async function ContactView() {
+  const data = await client.fetch(contactPageQuery);
   return (
     <div className="relative w-full min-h-screen bg-black overflow-hidden selection:bg-stone-200 selection:text-zinc-900">
-      
       {/* Visual Background */}
       <div className="fixed inset-0 z-0">
         <BackgroundLayer />
@@ -12,8 +14,8 @@ export default function ContactView() {
 
       {/* Main Container: Centering the Grid */}
       <main className="relative z-10 w-full min-h-screen flex flex-col items-center justify-center">
-        <ContactGrid />
-        
+        <ContactGrid data={data} />
+
         {/* Footer info (Optional) */}
         <div>
           <p className="text-stone-600 text-[10px] font-mono uppercase tracking-widest">
