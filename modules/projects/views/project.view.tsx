@@ -7,6 +7,7 @@ import { ProjectNavigation } from "../components/project-navigation";
 import { client } from "@/sanity/lib/client";
 import { projectQuery } from "@/sanity/queries/projectPage";
 import { BackgroundLayer } from "@/components/background/background-layer";
+import { Navbar } from "@/components/navbar/navbar";
 
 // The View now expects a direct string, not the params object
 interface ProjectViewProps {
@@ -36,6 +37,7 @@ export default async function ProjectView({ slug }: ProjectViewProps) {
     <div className="w-full min-h-screen">
       <BackgroundLayer/>
       {/* HERO */}
+      <Navbar/>
       <ProjectHero
         title={data.title}
         services={data.services ?? []}

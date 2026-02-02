@@ -5,6 +5,7 @@ import { AboutHero } from "../components/about-hero";
 import { AboutProcess } from "../components/about-process";
 import { AboutStory } from "../components/about-story";
 import { SpaceAudio } from "@/components/background/space-audio";
+import { Navbar } from "@/components/navbar/navbar";
 
 export default async function AboutView() {
   const data = await client.fetch(aboutPageQuery)
@@ -13,6 +14,7 @@ export default async function AboutView() {
 
       <main className="w-full">
         {/* Hero Section */}
+        <Navbar/>
         <AboutHero data={data} />
         {/* <SpaceAudio/> */}
         {/* Content Section */}

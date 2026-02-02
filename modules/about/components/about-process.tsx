@@ -15,39 +15,6 @@ type AboutProcessProps = {
   data: AboutProcessSection;
 };
 
-// const STEPS = [
-//   {
-//     id: "01",
-//     title: "Context Before Craft",
-//     description:
-//       "Every engagement begins with understanding the full context. We study business objectives, audiences, constraints, and existing systems to ensure the work is grounded in real operational needs.",
-//   },
-//   {
-//     id: "02",
-//     title: "Direction With Intent",
-//     description:
-//       "Insights are translated into a clear creative and strategic direction. Scope, priorities, and boundaries are defined early to maintain alignment and focus throughout execution.",
-//   },
-//   {
-//     id: "03",
-//     title: "Ideas Into Systems",
-//     description:
-//       "Concepts are developed as scalable systems rather than isolated outputs. This approach ensures consistency, efficiency, and adaptability across platforms and long-term use.",
-//   },
-//   {
-//     id: "04",
-//     title: "Execution With Precision",
-//     description:
-//       "Creative direction becomes tangible output through disciplined execution. We focus on clarity, performance, and craft to ensure every deliverable meets professional and technical standards.",
-//   },
-//   {
-//     id: "05",
-//     title: "Delivery With Continuity",
-//     description:
-//       "Delivery is handled as a structured handover, not a conclusion. Assets, documentation, and context are prepared to support seamless integration, scaling, or ongoing collaboration.",
-//   },
-// ];
-
 export function AboutProcess({data}: AboutProcessProps) {
   const steps = data.steps;
   const step1 = steps[0];
@@ -99,18 +66,18 @@ function ProcessCard({
   index: number;
 }) {
   return (
-    <Card className="group bg-zinc-800 border-zinc-800 h-[500px] w-full flex flex-col justify-between hover:bg-stone-300 transition-colors duration-850 ease-out">
+    <Card className="group bg-white h-[450px] w-full flex flex-col justify-between transition-colors duration-850 ease-out">
       <CardHeader className="p-8">
-        <span className="text-lg font-mono text-zinc-800 group-hover:text-zinc-800 mb-4 block transition-colors duration-300">
+        <span className="text-lg font-mono text-black group-hover:text-zinc-800 mb-4 block transition-colors duration-300">
           {String(index + 1).padStart(2, "0")}
         </span>
-        <CardTitle className="text-3xl text-zinc-800 group-hover:text-zinc-800 font-normal leading-tight transition-colors duration-300">
+        <CardTitle className="text-3xl text-black group-hover:text-zinc-800 font-normal leading-tight transition-colors duration-300">
           {step.title}
         </CardTitle>
       </CardHeader>
 
       <CardContent className="p-8 pt-0">
-        <p className="text-zinc-800 group-hover:text-zinc-800 leading-relaxed transition-colors duration-300">
+        <p className="text-black group-hover:text-zinc-800 leading-relaxed transition-colors duration-300">
           {step.description}
         </p>
       </CardContent>

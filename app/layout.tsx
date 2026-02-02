@@ -14,8 +14,40 @@ const geistMono = Geist_Mono({
 });
 
 export const metadata: Metadata = {
-  title: "Whitelister",
-  description: "Agency-driven",
+  title: {
+    default: "Delapan Space | Creative Strategy & Digital Production Studio",
+    template: "%s | Delapan Space",
+  },
+  description: 
+    "A production-focused creative studio specializing in social media management, brand design, and high-end digital experiences for global agencies and businesses.",
+  metadataBase: new URL("https://delapan.space"), // Update with your actual URL
+  alternates: {
+    canonical: "/",
+  },
+  openGraph: {
+    title: "Delapan Space | Global Creative Strategy",
+    description: "High-end design and digital production partner based in Indonesia.",
+    url: "https://delapan.space",
+    siteName: "Delapan Space",
+    locale: "en_US",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Delapan Space | Creative Strategy & Production",
+    description: "Elevating brands with strategic design and social-first content.",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      'max-video-preview': -1,
+      'max-image-preview': 'large',
+      'max-snippet': -1,
+    },
+  },
 };
 
 export default function RootLayout({

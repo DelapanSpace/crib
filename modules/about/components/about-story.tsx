@@ -20,9 +20,9 @@ export function AboutStory({ data }: AboutStoryProps) {
         </div>
 
         {/* Right Column: Paragraphs */}
-        <div className="md:col-span-7 flex flex-col gap-8 text-lg md:text-xl leading-relaxed text-gray-800 font-light">
+        <div className="md:col-span-7 flex flex-col gap-8 text-lg md:text-xl leading-relaxed text-black font-light">
           {data.storyParagraphs.map((text, i) => (
-            <p key={i} className={i === 0 ? "" : "text-gray-400"}>
+            <p key={i} className={i === 0 ? "" : "text-black"}>
               {text}
             </p>
           ))}
