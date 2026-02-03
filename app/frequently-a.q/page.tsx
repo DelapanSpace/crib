@@ -1,9 +1,11 @@
 import FaqView from "@/modules/faq/views/faq.view";
 
 export const metadata = {
-  title: "FAQ | Delapan Space",
-  description: "Common questions about our whitelist creative agency services.",
+  title: "Frequently Asked Questions | Delapan Space",
+  description: "Common questions about our white-label creative agency services.",
 };
+
+export const revalidate = 3600
 
 export default function FaqPage() {
   return <FaqView />;

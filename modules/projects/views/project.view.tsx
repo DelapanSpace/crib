@@ -1,13 +1,35 @@
+import dynamic from "next/dynamic";
 import { ProjectHero } from "../components/project-hero";
-import { ProjectContent } from "../components/project-content";
-import { ProjectGallery } from "../components/project-gallery";
-import { ProjectProcess } from "../components/project-process";
-import { ProjectImpact } from "../components/project-impact";
-import { ProjectNavigation } from "../components/project-navigation";
 import { client } from "@/sanity/lib/client";
 import { projectQuery } from "@/sanity/queries/projectPage";
 import { BackgroundLayer } from "@/components/background/background-layer";
 import { Navbar } from "@/components/navbar/navbar";
+
+const ProjectContent = dynamic(() =>
+  import("../components/project-content").then((mod) => mod.ProjectContent),
+);
+
+const ProjectGallery = dynamic(
+  () =>
+    import("../components/project-gallery").then((mod) => mod.ProjectGallery),
+  {
+    loading: () => <div className="h-[500px] w-full" />, // Optional: Holds space while loading
+  },
+);
+
+const ProjectProcess = dynamic(() =>
+  import("../components/project-process").then((mod) => mod.ProjectProcess),
+);
+
+const ProjectImpact = dynamic(() =>
+  import("../components/project-impact").then((mod) => mod.ProjectImpact),
+);
+
+const ProjectNavigation = dynamic(() =>
+  import("../components/project-navigation").then(
+    (mod) => mod.ProjectNavigation,
+  ),
+);
 
 // The View now expects a direct string, not the params object
 interface ProjectViewProps {
@@ -35,9 +57,9 @@ export default async function ProjectView({ slug }: ProjectViewProps) {
 
   return (
     <div className="w-full min-h-screen">
-      <BackgroundLayer/>
+      <BackgroundLayer />
       {/* HERO */}
-      <Navbar/>
+      <Navbar />
       <ProjectHero
         title={data.title}
         services={data.services ?? []}
@@ -46,10 +68,7 @@ export default async function ProjectView({ slug }: ProjectViewProps) {
 
       {/* CONTENT - Only render if sections exist */}
       {data.section1 && data.section2 && (
-        <ProjectContent
-          section1={data.section1}
-          section2={data.section2}
-        />
+        <ProjectContent section1={data.section1} section2={data.section2} />
       )}
 
       {/* GALLERY - Pass data from Sanity */}
@@ -59,10 +78,10 @@ export default async function ProjectView({ slug }: ProjectViewProps) {
       <ProjectProcess data={data.process} />
 
       {/* IMPACT - (You can add data props here later if you make this dynamic) */}
-      <ProjectImpact data={data.impact}/>
-      
+      <ProjectImpact data={data.impact} />
+
       {/* NAVIGATION */}
-      <ProjectNavigation prev={data.prev} next={data.next}/>
+      <ProjectNavigation prev={data.prev} next={data.next} />
     </div>
   );
 }

@@ -11,9 +11,9 @@ export function AboutStory({ data }: AboutStoryProps) {
       <div className="max-w-[1600px] mx-auto grid grid-cols-1 md:grid-cols-12 gap-12 md:gap-24">
         {/* Left Column: Heading & Number */}
         <div className="md:col-span-5 flex items-start gap-4">
-          <span className="rounded-full border border-gray-300 w-8 h-8 flex items-center justify-center text-xs text-gray-500 font-mono mt-2">
+          {/* <span className="rounded-full border border-gray-300 w-8 h-8 flex items-center justify-center text-xs text-gray-500 font-mono mt-2">
             {data.storyNumber}
-          </span>
+          </span> */}
           <h2 className="text-6xl md:text-8xl font-medium tracking-tight leading-none">
             {data.storyTitle}
           </h2>
