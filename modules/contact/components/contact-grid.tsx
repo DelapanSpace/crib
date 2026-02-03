@@ -8,7 +8,7 @@ import {
   TooltipTrigger,
 } from "@/components/ui/tooltip";
 import { useSynthClick } from "@/hooks/use-synth-click";
-import { ArrowLeft, HelpCircle } from "lucide-react";
+import { HelpCircle } from "lucide-react";
 import Link from "next/link";
 import { AiFillInstagram } from "react-icons/ai";
 import { FaLinkedin } from "react-icons/fa";
@@ -71,26 +71,6 @@ export function ContactGrid({ data = MOCK_DATA }: ContactGridProps) {
   return (
     <TooltipProvider delayDuration={500}>
       <section className="w-full min-h-screen flex flex-col items-center justify-center px-6 py-20 relative">
-        <Link
-          href="/"
-          aria-label="Back to home"
-          className="
-          absolute
-          top-4 left-4
-          md:top-8 md:left-8
-          z-20
-          w-10 h-10 md:w-12 md:h-12
-          rounded-full
-          border border-white/60
-          flex items-center justify-center
-          backdrop-blur-sm
-          hover:border-white
-          hover:bg-white/10
-          transition
-        "
-        >
-          <ArrowLeft className="w-5 h-5 md:w-6 md:h-6 text-white" />
-        </Link>
 
         <Card className="bg-black/10 border border-white/10 hover:border-white/30 transition-all duration-1000 ease-out p-6 w-fit">
           <div className="grid grid-cols-4 gap-6">

@@ -1,5 +1,3 @@
-import { ArrowLeft } from "lucide-react";
-import Link from "next/link";
 
 interface ProjectHeroProps {
   title: string;
@@ -28,22 +26,6 @@ export function ProjectHero({ title, services, imageSrc }: ProjectHeroProps) {
         {/* Overlay for text readability */}
         <div className="absolute inset-0 bg-black/30" />
       </div>
-
-      {/* 2. Navigation (Top Left) */}
-      <Link
-        href="/"
-        className="
-          absolute top-8 left-6 md:top-12 md:left-12 
-          z-30 w-12 h-12 
-          rounded-full border border-white/30 
-          flex items-center justify-center 
-          backdrop-blur-md bg-white/10
-          hover:bg-white hover:text-black hover:border-white
-          transition-all duration-300
-        "
-      >
-        <ArrowLeft className="w-5 h-5" />
-      </Link>
 
       {/* 3. Main Title (Centered) */}
       <div className="relative z-20 w-full h-full flex flex-col items-center justify-center px-4">

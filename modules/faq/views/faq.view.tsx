@@ -1,6 +1,7 @@
 import { client } from "@/sanity/lib/client";
 import { faqPageQuery } from "@/sanity/queries/faqPage";
 import { FaqSection } from "../components/faq-section";
+import { Navbar } from "@/components/navbar/navbar";
 
 export default async function FaqView() {
   const data = await client.fetch(faqPageQuery);
@@ -8,6 +9,7 @@ export default async function FaqView() {
     // Force white background for this page
     <div className="relative w-full min-h-screen">
       <main className="w-full">
+        <Navbar/>
         <FaqSection data={data} />
       </main>
     </div>

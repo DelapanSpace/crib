@@ -1,4 +1,6 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+"use client";
+import { TiltCard } from "@/modules/our-services/components/utils";
+import { motion, Variants } from "framer-motion";
 
 export type AboutProcessStep = {
   id: string;
@@ -15,40 +17,19 @@ type AboutProcessProps = {
   data: AboutProcessSection;
 };
 
-// const STEPS = [
-//   {
-//     id: "01",
-//     title: "Context Before Craft",
-//     description:
-//       "Every engagement begins with understanding the full context. We study business objectives, audiences, constraints, and existing systems to ensure the work is grounded in real operational needs.",
-//   },
-//   {
-//     id: "02",
-//     title: "Direction With Intent",
-//     description:
-//       "Insights are translated into a clear creative and strategic direction. Scope, priorities, and boundaries are defined early to maintain alignment and focus throughout execution.",
-//   },
-//   {
-//     id: "03",
-//     title: "Ideas Into Systems",
-//     description:
-//       "Concepts are developed as scalable systems rather than isolated outputs. This approach ensures consistency, efficiency, and adaptability across platforms and long-term use.",
-//   },
-//   {
-//     id: "04",
-//     title: "Execution With Precision",
-//     description:
-//       "Creative direction becomes tangible output through disciplined execution. We focus on clarity, performance, and craft to ensure every deliverable meets professional and technical standards.",
-//   },
-//   {
-//     id: "05",
-//     title: "Delivery With Continuity",
-//     description:
-//       "Delivery is handled as a structured handover, not a conclusion. Assets, documentation, and context are prepared to support seamless integration, scaling, or ongoing collaboration.",
-//   },
-// ];
+const cardVariants: Variants = {
+  hidden: { opacity: 0, y: 20 },
+  visible: {
+    opacity: 1,
+    y: 0,
+    transition: {
+      duration: 0.5,
+      ease: "easeOut",
+    },
+  },
+};
 
-export function AboutProcess({data}: AboutProcessProps) {
+export function AboutProcess({ data }: AboutProcessProps) {
   const steps = data.steps;
   const step1 = steps[0];
   const step2 = steps[1];
@@ -99,21 +80,45 @@ function ProcessCard({
   index: number;
 }) {
   return (
-    <Card className="group bg-zinc-800 border-zinc-800 h-[500px] w-full flex flex-col justify-between hover:bg-stone-300 transition-colors duration-850 ease-out">
-      <CardHeader className="p-8">
-        <span className="text-lg font-mono text-zinc-800 group-hover:text-zinc-800 mb-4 block transition-colors duration-300">
-          {String(index + 1).padStart(2, "0")}
-        </span>
-        <CardTitle className="text-3xl text-zinc-800 group-hover:text-zinc-800 font-normal leading-tight transition-colors duration-300">
-          {step.title}
-        </CardTitle>
-      </CardHeader>
+    <motion.div variants={cardVariants} className="h-full">
+      <TiltCard className="group h-[450px] w-full">
+        {/* 1. Glow Behind Card */}
+        <div className="absolute -inset-[1px] rounded-[32px] bg-gradient-to-b from-white/20 to-transparent opacity-0 group-hover:opacity-40 transition-opacity duration-700 blur-md" />
 
-      <CardContent className="p-8 pt-0">
-        <p className="text-zinc-800 group-hover:text-zinc-800 leading-relaxed transition-colors duration-300">
-          {step.description}
-        </p>
-      </CardContent>
-    </Card>
+        {/* 2. GLASS CARD CONTAINER */}
+        <div className="relative h-full flex flex-col justify-between rounded-[30px] border border-white/10 bg-white/5 backdrop-blur-2xl p-8 shadow-2xl overflow-hidden">
+          {/* Top Shine */}
+          <div className="absolute top-0 left-0 right-0 h-[1px] bg-gradient-to-r from-transparent via-white/40 to-transparent opacity-50" />
+
+          {/* Inner Content - Preserving Position & Composition */}
+          <div className="relative z-10 flex flex-col h-full justify-between">
+            {/* Header Area */}
+            <div>
+              <span className="text-lg font-mono text-zinc-500 group-hover:text-white mb-4 block transition-colors duration-300">
+                {String(index + 1).padStart(2, "0")}
+              </span>
+              <h3 className="text-3xl text-zinc-200 group-hover:text-white font-normal leading-tight transition-colors duration-300">
+                {step.title}
+              </h3>
+            </div>
+
+            {/* Bottom Content Area */}
+            <div>
+              {/* Animated Divider Line (Mirrored from ServiceApproach) */}
+              <div className="w-full h-px bg-white/10 mb-6 relative overflow-hidden">
+                <div className="absolute top-0 left-0 w-full h-full bg-white/50 -translate-x-full group-hover:translate-x-0 transition-transform duration-700 ease-in-out" />
+              </div>
+
+              <p className="text-zinc-500 group-hover:text-zinc-300 leading-relaxed transition-colors duration-300">
+                {step.description}
+              </p>
+            </div>
+          </div>
+
+          {/* Inner Blur Decoration (Subtle Blob) */}
+          <div className="absolute -bottom-10 -right-10 w-32 h-32 bg-white/5 rounded-full blur-[40px] pointer-events-none group-hover:bg-white/10 transition-colors duration-500" />
+        </div>
+      </TiltCard>
+    </motion.div>
   );
 }

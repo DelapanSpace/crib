@@ -2,11 +2,13 @@ import { BackgroundLayer } from "@/components/background/background-layer";
 import { client } from "@/sanity/lib/client";
 import { contactPageQuery } from "@/sanity/queries/contactPage";
 import { ContactGrid } from "../components/contact-grid";
+import { Navbar } from "@/components/navbar/navbar";
 
 export default async function ContactView() {
   const data = await client.fetch(contactPageQuery);
   return (
     <div className="relative w-full min-h-screen bg-black overflow-hidden selection:bg-stone-200 selection:text-zinc-900">
+      <Navbar/>
       {/* Visual Background */}
       <div className="fixed inset-0 z-0">
         <BackgroundLayer />

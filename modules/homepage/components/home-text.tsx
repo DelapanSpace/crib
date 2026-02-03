@@ -1,5 +1,5 @@
 "use client";
-
+import { Mouse } from "lucide-react";
 import {
   Popover,
   PopoverContent,
@@ -149,6 +149,13 @@ export function HomeText() {
             {WORDS[nextIndex]}
           </span>
         </div>
+      </div>
+
+     <div className="hidden md:flex fixed top-40 left-20 z-50 items-center gap-3 opacity-60 animate-pulse pointer-events-none">
+        <Mouse className="w-5 h-5 text-white" />
+        <span className="text-xs font-medium tracking-[0.2em] text-white uppercase">
+          Scroll / Slide Your Trackpad to Navigate
+        </span>
       </div>
 
       {/* MOBILE CONTROLS (Hidden on Desktop 'md:hidden') */}

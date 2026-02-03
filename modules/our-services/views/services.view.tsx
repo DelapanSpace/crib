@@ -1,19 +1,35 @@
-import { client } from "@/sanity/lib/client";
-import { servicePageQuery } from "@/sanity/queries/servicePage";
-import { ServiceFlow } from "../components/service-flow";
+// import { client } from "@/sanity/lib/client";
+// import { servicePageQuery } from "@/sanity/queries/servicePage";
+// import { ServiceFlow } from "../components/service-index";
 
-// Optional: Force dynamic if you need real-time updates without building
-// export const dynamic = 'force-dynamic';
+// // Optional: Force dynamic if you need real-time updates without building
+// // export const dynamic = 'force-dynamic';
 
-export default async function ServiceView() {
-  // Fetch data from Sanity
-  const data = await client.fetch(servicePageQuery);
+// export default async function ServiceView() {
+//   // Fetch data from Sanity
+//   const data = await client.fetch(servicePageQuery);
 
+//   return (
+//     <div className="relative w-full h-screen overflow-hidden">
+//       <main className="w-full h-full">
+//         {/* Pass fetched data to the client component */}
+//         <ServiceFlow data={data} />
+//       </main>
+//     </div>
+//   );
+// }
+
+import { Navbar } from "@/components/navbar/navbar";
+import { ServiceFlow } from "../components/service-index";
+import { BackgroundLayer } from "@/components/background/background-layer";
+
+export default function ServiceView() {
   return (
-    <div className="relative w-full h-screen overflow-hidden">
-      <main className="w-full h-full">
-        {/* Pass fetched data to the client component */}
-        <ServiceFlow data={data} />
+    <div className="relative w-full min-h-screen overflow-hidden">
+      <main className="w-full">
+        <BackgroundLayer/>
+        <Navbar/>
+        <ServiceFlow />
       </main>
     </div>
   );
