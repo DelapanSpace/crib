@@ -19,12 +19,16 @@
 //   );
 // }
 
+import { Navbar } from "@/components/navbar/navbar";
 import { ServiceFlow } from "../components/service-index";
+import { BackgroundLayer } from "@/components/background/background-layer";
 
 export default function ServiceView() {
   return (
-    <div className="relative w-full min-h-screen overflow-hidden bg-black">
+    <div className="relative w-full min-h-screen overflow-hidden">
       <main className="w-full">
+        <BackgroundLayer/>
+        <Navbar/>
         <ServiceFlow />
       </main>
     </div>

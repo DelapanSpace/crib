@@ -1,6 +1,6 @@
 "use client";
 
-import { AnimatePresence, motion } from "framer-motion";
+import { motion } from "framer-motion";
 import { ArrowLeft, ArrowRight, RotateCcw } from "lucide-react";
 import Image from "next/image";
 import { useRef, useState } from "react";
@@ -116,7 +116,7 @@ export function ServiceList() {
   return (
     <section
       id="services"
-      className="relative w-full min-h-screen bg-white text-black py-24 flex flex-col justify-center overflow-hidden"
+      className="relative w-full max-h-[1000px] text-black py-0 flex flex-col justify-center overflow-hidden"
     >
       <script
         type="application/ld+json"
@@ -213,7 +213,7 @@ export function ServiceList() {
 
                   {/* --- BACK FACE (DESCRIPTION) --- */}
                   <div
-                    className="absolute inset-0 w-full h-full backface-hidden bg-black text-white p-10 flex flex-col items-center justify-center text-center"
+                    className="absolute inset-0 w-full h-full backface-hidden text-white p-10 flex flex-col items-center justify-center text-center"
                     style={{ transform: "rotateY(180deg)" }}
                   >
                     <span className="text-sm font-mono text-zinc-500 mb-6">
