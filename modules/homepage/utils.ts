@@ -7,12 +7,14 @@ export const WORDS = [
 ] as const;
 
 export const PROJECTS = [
-  "PRODUCT PHOTOGRAPHY",
+  // "AURA",
   "ARSIPAN",
   "BERSATU",
+  "BIOFIT",
   "BP TAPERA",
   "DIGITAL MENTAL COACH",
   "GATI",
+  "PRODUCT PHOTOGRAPHY",
   "STOVINED MEDIA",
   "USS",
 ] as const;
