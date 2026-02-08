@@ -83,7 +83,7 @@ export function ServiceList() {
   const jsonLd = {
     "@context": "https://schema.org",
     "@type": "ItemList",
-    name: "Delapan Space Services",
+    name: "8Space Services",
     itemListElement: services.map((service, index) => ({
       "@type": "Service",
       position: index + 1,

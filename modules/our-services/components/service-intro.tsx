@@ -40,7 +40,7 @@ export function ServiceIntro() {
               {/* Main Heading */}
               <div className="text-7xl md:text-8xl lg:text-[10rem] font-bold uppercase tracking-tighter leading-[0.85] select-none">
                 {/* Line 1: Delapan */}
-                <InteractiveTitle text="Delapan" delay={0.1} />
+                <InteractiveTitle text="8Space" delay={0.1} />
 
                 {/* Line 2: Services */}
                 <div className="pl-2">

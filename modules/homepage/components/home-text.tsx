@@ -1,5 +1,5 @@
 "use client";
-import { Mouse } from "lucide-react";
+import AnimatedLogo from "@/components/animatedLogo";
 import {
   Popover,
   PopoverContent,
@@ -7,7 +7,7 @@ import {
 } from "@/components/ui/popover";
 import { useWheelWordIndex } from "@/hooks/use-scroll-word";
 import { useWordGsap } from "@/hooks/use-word-gsap";
-import { ArrowDown, ArrowUp } from "lucide-react";
+import { ArrowDown, ArrowUp, Mouse } from "lucide-react";
 import { useRouter } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
 import { WORDS, getNextIndex, getPrevIndex } from "../utils";
@@ -150,6 +150,10 @@ export function HomeText() {
           </span>
         </div>
       </div>
+
+      <div className="fixed right-15 md:right-18 lg:right-30 top-1/2 -translate-y-1/2 z-50 pointer-events-none w-50 h-50 md:w-75 md:h-75 lg:w-130 lg:h-130 overflow-visible">
+  <AnimatedLogo/>
+</div>
 
      <div className="hidden md:flex fixed top-40 left-20 z-50 items-center gap-3 opacity-60 animate-pulse pointer-events-none">
         <Mouse className="w-5 h-5 text-white" />
