@@ -1,7 +1,7 @@
 import FaqView from "@/modules/faq/views/faq.view";
 
 export const metadata = {
-  title: "Frequently Asked Questions | Delapan Space",
+  title: "Frequently Asked Questions | 8Space",
   description: "Common questions about our white-label creative agency services.",
 };
 

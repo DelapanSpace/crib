@@ -15,7 +15,7 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: {
-    default: "Delapan Space | Creative Strategy & Digital Production Studio",
+    default: "8Space | Creative Strategy & Digital Production Studio",
     template: "%s | Delapan Space",
   },
   description: 
@@ -27,14 +27,14 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Delapan Space | Global Creative Strategy",
     description: "High-end design and digital production partner based in Indonesia.",
-    url: "https://delapan.space",
-    siteName: "Delapan Space",
+    url: "https://dlpn.space",
+    siteName: "8Space",
     locale: "en_US",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "Delapan Space | Creative Strategy & Production",
+    title: "8Space | Creative Strategy & Production",
     description: "Elevating brands with strategic design and social-first content.",
   },
   robots: {

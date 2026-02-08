@@ -6,6 +6,7 @@ import { PROJECTS } from "@/modules/homepage/utils";
 import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react"; // Changed to named imports
+import AnimatedLogo from "../animatedLogo";
 
 export function Navbar() {
   const router = useRouter();
@@ -64,9 +65,12 @@ export function Navbar() {
         {/* LOGO (Left) */}
         <Link href="/" className="relative z-50 group">
           <div className="flex items-center gap-3">
-            <span className="text-white font-bold text-lg tracking-widest uppercase opacity-90 group-hover:opacity-100 transition-opacity">
-              Delapan Space
+            <span className="text-white text-mono font-extrabold text-lg tracking-widest uppercase opacity-90 group-hover:opacity-100 transition-opacity">
+              8Space
             </span>
+            <div className="rotate-90 h-12 w-12">
+            <AnimatedLogo/>
+            </div>
           </div>
         </Link>
 

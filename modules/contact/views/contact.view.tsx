@@ -21,7 +21,7 @@ export default async function ContactView() {
         {/* Footer info (Optional) */}
         <div>
           <p className="text-stone-600 text-[10px] font-mono uppercase tracking-widest">
-            Delapan Space © 2026
+            8Space © 2026
           </p>
         </div>
       </main>
