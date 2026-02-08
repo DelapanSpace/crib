@@ -11,65 +11,65 @@ const services = [
     id: "01",
     title: "WEB DEVELOPMENT",
     description:
-      "Scalable, high-performance websites and web applications tailored to your business objectives, built with modern technologies for speed and reliability.",
-    tags: "Front-end, Back-end, Web3",
-    src: "https://images.unsplash.com/photo-1555421689-d68471e88984?q=80&w=1000&auto=format&fit=crop",
+      "Custom, full-stack web solutions designed for speed and scalability. From responsive corporate sites to complex e-commerce platforms, we build secure digital foundations using modern frameworks like React, Next.js, and Node.",
+    tags: "Full-Stack, E-commerce, CMS Integration, API Development, PWA",
+    src: "/web-dev-2.jpg",
   },
   {
     id: "02",
     title: "UI/UX DESIGN",
     description:
-      "Designing intuitive and engaging digital experiences that prioritize user needs while seamlessly integrating with your brand's visual identity.",
-    tags: "User Research, Prototyping",
-    src: "https://images.unsplash.com/photo-1561070791-2526d30994b5?q=80&w=1000&auto=format&fit=crop",
+      "Creating user-centric interfaces that convert. We combine deep user research with high-fidelity prototyping to deliver intuitive mobile and web experiences that align perfectly with your brand identity and accessibility standards.",
+    tags: "User Research, Wireframing, Mobile App Design, Design Systems, Interaction Design",
+    src: "/ui-ux-design.jpg",
   },
   {
     id: "03",
     title: "Social Media",
     description:
-      "Strategic content planning and community management designed to grow your audience, foster engagement, and build lasting brand loyalty.",
-    tags: "Content Strategy, Analytics",
-    src: "https://images.unsplash.com/photo-1611162617474-5b21e879e113?q=80&w=1000&auto=format&fit=crop",
+      "End-to-end social media management that turns followers into customers. We handle content creation, community engagement, and algorithmic strategies across Instagram, TikTok, and LinkedIn to maximize organic reach.",
+    tags: "Content Creation, Community Management, Reels/TikTok Production, Copywriting, Social Strategy",
+    src: "/social-media.jpg",
   },
   {
     id: "04",
     title: "Digital Marketing",
     description:
-      "Data-driven performance marketing campaigns that increase visibility, drive qualified traffic, and maximize conversion rates across digital channels.",
-    tags: "SEO, SEM, Paid Social",
-    src: "https://images.unsplash.com/photo-1460925895917-afdab827c52f?q=80&w=1000&auto=format&fit=crop",
+      "Performance-based marketing strategies focused on ROI. We optimize your sales funnel through targeted PPC, precision SEO, and data-driven ad campaigns across Google and Meta platforms to drive qualified leads.",
+    tags: "Lead Generation, SEO, Google Ads (SEM), Meta Ads, Conversion Rate Optimization (CRO)",
+    src: "/digmar.jpg",
   },
   {
     id: "05",
     title: "Brand Design",
     description:
-      "Crafting distinctive visual identities and comprehensive brand systems that resonate with your target audience and stand the test of time.",
-    tags: "Brand Strategy, Logo Design",
-    src: "https://images.unsplash.com/photo-1626785774573-4b7993143d2d?q=80&w=1000&auto=format&fit=crop",
+      "Building memorable brand systems that tell your story. We deliver comprehensive visual identities, including logo suites, typography, and brand guidelines that ensure consistency across all customer touchpoints.",
+    tags: "Visual Identity, Logo Design, Brand Guidelines, Rebranding, Corporate Stationery",
+    src: "/brand-design.jpg",
   },
   {
     id: "06",
     title: "Photography",
     description:
-      "High-end commercial photography that highlights the quality and details of your products, elevating your visual assets for web and print.",
-    tags: "Studio Shoots, Retouching",
-    src: "https://images.unsplash.com/photo-1542038784456-1ea8e935640e?q=80&w=1000&auto=format&fit=crop",
+      "Professional commercial and lifestyle photography that elevates your brand perception. We provide full-service production, from creative direction to high-end retouching, perfect for product catalogs and marketing collateral.",
+    tags: "Product Photography, Lifestyle, Editorial, Art Direction, Post-Production",
+    src: "/photography.jpg",
   },
   {
     id: "07",
     title: "KOL Management",
     description:
-      "Leveraging authentic voices through influencer partnerships and user-generated content to build trust and expand your brand's reach organically.",
-    tags: "Influencer Outreach, PR",
-    src: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?q=80&w=1000&auto=format&fit=crop",
+      "Connecting your brand with authentic influencers who drive action. We handle the entire campaign lifecycle—from vetting niche talent and contract negotiation to brief creation and performance tracking.",
+    tags: "Influencer Marketing, Talent Vetting, Campaign Management, PR, UGC Strategy",
+    src: "/kol-mgmt.jpg",
   },
   {
     id: "08",
     title: "360 Campaign",
     description:
-      "Integrated, omni-channel marketing campaigns that deliver a cohesive message across all touchpoints, from digital to physical.",
-    tags: "Creative Strategy, Events",
-    src: "https://images.unsplash.com/photo-1557804506-669a67965ba0?q=80&w=1000&auto=format&fit=crop",
+      "Holistic marketing activations that bridge the digital and physical worlds. We orchestrate omni-channel strategies combining OOH, digital media, and events to deliver a unified and impactful brand message.",
+    tags: "Omni-channel Strategy, Media Buying, Creative Direction, OOH & Activations, Event Management",
+    src: "/360camp.jpg",
   },
 ];
 

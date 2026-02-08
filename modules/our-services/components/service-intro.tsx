@@ -74,13 +74,13 @@ export function ServiceIntro() {
                       className="text-3xl md:text-4xl leading-tight font-light text-white drop-shadow-sm"
                       delay={0.3}
                     >
-                      We craft digital
+                      We unite strategic design, high-impact content,
                     </MaskedText>
                     <MaskedText
                       className="text-3xl md:text-4xl leading-tight font-light text-white drop-shadow-sm"
                       delay={0.4}
                     >
-                      experiences that
+                      and active community management
                     </MaskedText>
                   </div>
 
@@ -89,13 +89,13 @@ export function ServiceIntro() {
                       className="text-3xl md:text-4xl leading-tight font-light text-white/60 drop-shadow-sm"
                       delay={0.5}
                     >
-                      connect brands with
+                      To build a cohesive and
                     </MaskedText>
                     <MaskedText
                       className="text-3xl md:text-4xl leading-tight font-light text-white/60 drop-shadow-sm"
                       delay={0.6}
                     >
-                      their audiences.
+                      powerful brand experience.
                     </MaskedText>
                   </div>
                 </div>
@@ -113,15 +113,15 @@ export function ServiceIntro() {
                       Shipped
                     </h4>
                     <p className="text-2xl font-medium text-white/90 font-mono">
-                      120+
+                      20+
                     </p>
                   </div>
                   <div>
                     <h4 className="text-[10px] text-white/30 font-mono mb-2 uppercase tracking-widest">
-                      Excellence
+                      Since
                     </h4>
                     <p className="text-2xl font-medium text-white/90 font-mono">
-                      08 YRS
+                      2021
                     </p>
                   </div>
                 </motion.div>

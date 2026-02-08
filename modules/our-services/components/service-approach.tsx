@@ -13,30 +13,30 @@ import { TiltCard } from "./utils";
 const principles = [
   {
     id: "01",
-    title: "Clarity Over Complexity",
+    title: "Simplifying Complexity for Impact",
     description:
-      "We strip away the unnecessary to reveal the essential. Every decision serves a purpose, every element earns its place.",
+      "We believe that the most effective digital solutions are often the simplest. We cut through the noise to deliver clear, intuitive, and user-friendly experiences that solve real business problems without unnecessary clutter.",
     icon: Circle,
   },
   {
     id: "02",
-    title: "Built to Last",
+    title: "Scalable, Future-Proof Foundations",
     description:
-      "We create systems, not just solutions. Our work is designed to evolve with your business, not expire with trends.",
+      "We don't just build for today; we engineer for your tomorrow. Our solutions use robust, adaptable architectures designed to grow alongside your business, ensuring long-term ROI and minimizing technical debt.",
     icon: Square,
   },
   {
     id: "03",
-    title: "Honest Collaboration",
+    title: "Transparent, Agile Partnership",
     description:
-      "No jargon, no smoke and mirrors. We believe in transparent processes and partnerships built on mutual respect.",
+      "We operate as an extension of your team, not just a vendor. You get full visibility into our process with open communication lines, regular updates, and honest advice that prioritizes your success over our convenience.",
     icon: Hexagon,
   },
   {
     id: "04",
-    title: "Details Matter",
+    title: "Precision & Uncompromising Quality",
     description:
-      "Excellence lives in the margins. We sweat the small stuff because craftsmanship shows in every pixel, every interaction.",
+      "True excellence lies in the details others overlook. From pixel-perfect design to optimized code, we refine every micro-interaction to ensure your brand projects professionalism and earns immediate user trust.",
     icon: Triangle,
   },
 ];
