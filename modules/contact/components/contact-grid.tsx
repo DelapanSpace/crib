@@ -70,7 +70,7 @@ export function ContactGrid({ data = MOCK_DATA }: ContactGridProps) {
 
   return (
     <TooltipProvider delayDuration={500}>
-      <section className="w-full min-h-screen flex flex-col items-center justify-center px-6 py-20 relative">
+      <section className="w-full flex flex-col items-center justify-center px-6 relative">
 
         <Card className="bg-black/10 border border-white/10 hover:border-white/30 transition-all duration-1000 ease-out p-6 w-fit">
           <div className="grid grid-cols-4 gap-6">
@@ -79,16 +79,20 @@ export function ContactGrid({ data = MOCK_DATA }: ContactGridProps) {
               // We lowercase it so "WhatsApp" matches "whatsapp" in our map
               const key = item.name.toLowerCase().trim();
               const IconComponent = ICON_MAP[key] || HelpCircle;
+              
+              const primaryLink = item.details[0]?.href || "#"
 
               return (
                 <Tooltip key={item.name}>
                   <TooltipTrigger asChild>
-                    <div
-                      className="text-white hover:text-zinc-300 cursor-pointer transition-all duration-1000 ease-out hover:scale-105"
+                    <Link
+                      href={primaryLink}
+                      target="_blank"
+                      className="text-white hover:text-zinc-300 cursor-pointer transition-all duration-1000 ease-out hover:scale-105 flex items-center justify-center" 
                       onMouseEnter={() => playClick()}
                     >
                       <IconComponent className="w-5 h-5" />
-                    </div>
+                    </Link>
                   </TooltipTrigger>
 
                   <TooltipContent
