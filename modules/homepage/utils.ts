@@ -1,7 +1,7 @@
 export const WORDS = [
   "ABOUT",
   "CONTACT",
-  "FREQUENTLY A.Q",
+  "FAQ",
   "PROJECTS",
   "SERVICES",
 ] as const;

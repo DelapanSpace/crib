@@ -21,12 +21,12 @@ export function ServiceIntro() {
   return (
     <section
       ref={containerRef}
-      className="relative w-full max-h-[800px] flex items-start justify-center text-white px-6 md:px-12 pt-25 pb-10 overflow-hidden"
+      className="relative w-full md:max-h-[800px] flex items-start justify-center text-white px-6 md:px-12 pt-25 pb-10 overflow-hidden"
     >
       <div className="relative z-10 w-full max-w-[1600px] mx-auto">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-20 items-center">
           {/* LEFT COLUMN (7 Cols) - Typography Anchor */}
-          <div className="lg:col-span-7 flex flex-col justify-center">
+          <div className="lg:col-span-7 flex flex-col justify-center ">
             <motion.div style={{ y }} className="relative">
               {/* Tagline */}
               <motion.div
@@ -38,7 +38,7 @@ export function ServiceIntro() {
               ></motion.div>
 
               {/* Main Heading */}
-              <div className="text-7xl md:text-8xl lg:text-[10rem] font-bold uppercase tracking-tighter leading-[0.85] select-none">
+              <div className=" text-7xl md:text-8xl lg:text-[10rem] font-bold uppercase tracking-tighter leading-[0.85] select-none">
                 {/* Line 1: Delapan */}
                 <InteractiveTitle text="8Space" delay={0.1} />
 

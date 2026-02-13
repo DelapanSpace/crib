@@ -43,7 +43,7 @@ export function HomeText() {
       next: nextRef,
     },
     currentIndex,
-    direction.current
+    direction.current,
   );
 
   // Close popover if user changes the word
@@ -151,11 +151,11 @@ export function HomeText() {
         </div>
       </div>
 
-      <div className="fixed right-15 md:right-18 lg:right-30 top-1/2 -translate-y-1/2 z-50 pointer-events-none w-50 h-50 md:w-75 md:h-75 lg:w-130 lg:h-130 overflow-visible">
-  <AnimatedLogo/>
-</div>
+      <div className="fixed right-10 md:right-18 lg:right-30 top-1/2 -translate-y-1/2 z-50 pointer-events-none w-30 h-30 md:w-75 md:h-75 lg:w-130 lg:h-130 overflow-visible">
+        <AnimatedLogo />
+      </div>
 
-     <div className="hidden md:flex fixed top-40 left-20 z-50 items-center gap-3 opacity-60 animate-pulse pointer-events-none">
+      <div className="hidden md:flex fixed top-40 left-20 z-50 items-center gap-3 opacity-60 animate-pulse pointer-events-none">
         <Mouse className="w-5 h-5 text-white" />
         <span className="text-xs font-medium tracking-[0.2em] text-white uppercase">
           Scroll / Slide Your Trackpad to Navigate
@@ -163,7 +163,7 @@ export function HomeText() {
       </div>
 
       {/* MOBILE CONTROLS (Hidden on Desktop 'md:hidden') */}
-      <div className="fixed bottom-12 right-6 flex flex-col gap-4 md:hidden z-50 pointer-events-auto">
+      <div className="fixed bottom-12 left-6 flex flex-col gap-4 md:hidden z-50 pointer-events-auto">
         <button
           onClick={prev}
           className="p-3 bg-white/10 backdrop-blur-md rounded-full text-white hover:bg-white/20 active:scale-95 transition-all border border-white/10"

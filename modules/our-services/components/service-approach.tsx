@@ -66,10 +66,10 @@ const cardVariants: Variants = {
 
 export function ServiceApproach() {
   return (
-    <section className="w-full max-h-[1000px] text-white px-6 md:px-12 flex items-start pt-10 pb-15">
+    <section className="w-full text-white px-6 md:px-12 flex items-start pt-20 pb-15">
       <div className="max-w-[1600px] mx-auto w-full">
         {/* Header */}
-        <div className="mb-16 md:mb-8">
+        <div className="mb-16 md:mb-8 flex flex-col items-center justify-center">
           <motion.h3
             initial={{ opacity: 0, x: -10 }}
             whileInView={{ opacity: 1, x: 0 }}

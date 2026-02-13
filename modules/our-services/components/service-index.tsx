@@ -19,7 +19,7 @@ const ServiceList = dynamic(() =>
 const ServiceCTA = dynamic(() => 
   import("./service-cta").then((mod) => mod.ServiceCTA));
 
-export function ServiceFlow() {
+export function ServiceIndex() {
   return (
     <>
       <ServiceIntro />      {/* Starts downloading immediately */}

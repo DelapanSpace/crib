@@ -3,7 +3,7 @@ import { urlFor } from "@/sanity/lib/image";
 export function AboutHero({ data }: any) {
   const title = data?.heroTitle || "";
   return (
-    <section className="relative w-full h-screen flex flex-col justify-end pb-20 px-6 md:px-12 overflow-hidden">
+    <section className="relative w-full min-h-[730px] md:min-h-screen flex flex-col justify-end pb-10 md:pb-20 px-6 md:px-12 overflow-hidden">
       {/* Background Image Layer */}
       <div
         className="absolute inset-0 z-0 bg-cover bg-center"
@@ -19,7 +19,7 @@ export function AboutHero({ data }: any) {
 
       {/* Hero Content */}
       <div className="relative z-10 w-full">
-        <h1 className="text-white text-[10vw] leading-[0.85] font-bold tracking-tighter uppercase break-words flex flex-wrap select-none">
+        <h1 className="text-white text-[8vw] md:text-[10vw] leading-[0.85] font-bold tracking-tighter uppercase break-words flex flex-wrap pb-10 md:pb-0 select-none">
           {title.split(" ").map((word: string, i: number) => (
             // Wrap each word to prevent line breaks in the middle of a word
             <span key={i} className="whitespace-nowrap">
