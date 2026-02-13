@@ -169,19 +169,19 @@ export function ServiceList() {
                   {/* --- FRONT FACE --- */}
                   <div className="absolute inset-0 w-full h-full backface-hidden bg-white flex flex-col justify-between p-8 overflow-hidden">
                     {/* Background Image (Appears on Hover) */}
-                    <div className="absolute inset-0 z-0 opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 ease-in-out">
+                    <div className="absolute inset-0 z-0 md:opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 ease-in-out">
                       <Image
                         src={service.src}
                         alt={service.title}
                         fill
-                        className="object-cover grayscale group-hover/card:grayscale-0 transition-all duration-700"
+                        className="object-cover md:grayscale group-hover/card:grayscale-0 transition-all duration-1000"
                       />
                       {/* Dark overlay for text readability on hover */}
                       <div className="absolute inset-0 bg-black/40" />
                     </div>
 
                     {/* Content (Z-10 to sit above image) */}
-                    <div className="relative z-10 w-full h-full flex flex-col items-center justify-between pointer-events-none text-black group-hover/card:text-white transition-colors duration-300">
+                    <div className="relative z-10 w-full h-full flex flex-col items-center justify-between pointer-events-none text-white md:text-black group-hover/card:text-white transition-colors duration-300">
                       {/* Top: Title */}
                       <div className="w-full text-center mt-12">
                         {/* Pill Label */}
@@ -199,12 +199,12 @@ export function ServiceList() {
 
                       {/* Bottom Left: Tags */}
                       <div className="w-full flex justify-between items-end">
-                        <div className="border border-black group-hover/card:border-white px-4 py-2 rounded-full uppercase text-xs font-medium tracking-wide">
+                        <div className="border md:border-black group-hover/card:border-white px-4 py-2 rounded-full uppercase text-xs font-medium tracking-wide">
                           {service.tags.split(",")[0]}
                         </div>
 
                         {/* Flip Indicator */}
-                        <div className="w-10 h-10 rounded-full border border-black/20 group-hover/card:border-white/50 flex items-center justify-center">
+                        <div className="w-10 h-10 rounded-full border md:border-black/20 group-hover/card:border-white/50 flex items-center justify-center">
                           <RotateCcw size={14} />
                         </div>
                       </div>
@@ -251,6 +251,8 @@ export function ServiceList() {
         }
         .backface-hidden {
           backface-visibility: hidden;
+          -webkit-backface-visibility: hidden;
+        transform: translateZ(0);
         }
         .perspective-1000 {
           perspective: 1000px;

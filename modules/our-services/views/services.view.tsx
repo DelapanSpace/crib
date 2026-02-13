@@ -20,7 +20,7 @@
 // }
 
 import { Navbar } from "@/components/navbar/navbar";
-import { ServiceFlow } from "../components/service-index";
+import { ServiceIndex } from "../components/service-index";
 import { BackgroundLayer } from "@/components/background/background-layer";
 
 export default function ServiceView() {
@@ -29,7 +29,7 @@ export default function ServiceView() {
       <main className="w-full">
         <BackgroundLayer/>
         <Navbar/>
-        <ServiceFlow />
+        <ServiceIndex />
       </main>
     </div>
   );

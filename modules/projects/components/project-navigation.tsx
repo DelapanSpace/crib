@@ -17,7 +17,7 @@ export function ProjectNavigation({ prev, next }: ProjectNavigationProps) {
   if (!prev || !next) return null;
 
   return (
-    <section className="w-full px-6 md:px-12 py-24 flex justify-between items-center text-white">
+    <section className="w-full px-6 md:px-12 py-16 grid grid-cols-2 gap-4 md:gap-200 text-white">
       {/* PREVIOUS PROJECT */}
       {prev && (
         <Link
@@ -29,6 +29,7 @@ export function ProjectNavigation({ prev, next }: ProjectNavigationProps) {
             border border-zinc-800 
             hover:border-white hover:bg-white/5 
             transition-all duration-300
+            min-w-0
           "
         >
           <div className="flex items-center gap-3 text-zinc-500 group-hover:text-white transition-colors">
@@ -37,7 +38,7 @@ export function ProjectNavigation({ prev, next }: ProjectNavigationProps) {
               Prev Project
             </span>
           </div>
-          <span className="text-lg md:text-xl font-medium text-white">
+          <span className="text-lg md:text-xl font-medium text-white truncate w-full text-left">
             {prev.title}
           </span>
         </Link>
@@ -54,6 +55,7 @@ export function ProjectNavigation({ prev, next }: ProjectNavigationProps) {
             border border-zinc-800 
             hover:border-white hover:bg-white/5 
             transition-all duration-300
+            min-w-0
           "
         >
           <div className="flex items-center gap-3 text-zinc-500 group-hover:text-white transition-colors">
@@ -62,7 +64,7 @@ export function ProjectNavigation({ prev, next }: ProjectNavigationProps) {
             </span>
             <ArrowRight className="w-4 h-4" />
           </div>
-          <span className="text-lg md:text-xl font-medium text-white">
+          <span className="text-lg md:text-xl font-medium text-white truncate w-full text-right">
             {next.title}
           </span>
         </Link>

@@ -39,6 +39,14 @@ export function AboutProcess({ data }: AboutProcessProps) {
       <div className="max-w-[1600px] mx-auto">
         {/* SINGLE GRID - Guarantees perfect alignment between rows */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+          
+          {/* Mobile Title Fallback (Visible only on small screens) */}
+          <div className="lg:hidden col-span-1 md:col-span-2 py-0 text-center">
+            <h2 className="text-5xl font-medium leading-[0.9] tracking-tighter uppercase">
+              {data.title}
+            </h2>
+          </div>
+
           {/* 1. Step 01 */}
           <ProcessCard step={step1} index={0} />
 
@@ -51,13 +59,6 @@ export function AboutProcess({ data }: AboutProcessProps) {
             <h2 className="text-5xl md:text-[6.5rem] font-medium leading-[0.9] tracking-tighter text-right uppercase">
               {data.title.split(" ")[0]} <br />
               {data.title.split(" ").slice(1).join(" ")}
-            </h2>
-          </div>
-
-          {/* Mobile Title Fallback (Visible only on small screens) */}
-          <div className="lg:hidden col-span-1 md:col-span-2 py-12">
-            <h2 className="text-8xl font-medium leading-[0.9] tracking-tighter uppercase">
-              {data.title}
             </h2>
           </div>
 

@@ -148,7 +148,7 @@ export function SpaceAudio() {
   return (
     <button
       onClick={toggleAudio}
-      className="fixed z-[100] p-4 rounded-full bg-black/30 backdrop-blur-md border border-white/10 hover:bg-black/80 hover:border-white/40 transition-all duration-500 group cursor-pointer bottom-12 left-6 md:bottom-8 md:right-8 md:left-auto"
+      className="fixed z-[100] p-4 rounded-full bg-black/30 backdrop-blur-md border border-white/10 hover:bg-black/80 hover:border-white/40 transition-all duration-500 group cursor-pointer bottom-12 right-6 md:bottom-8 md:right-8 md:left-auto"
     >
       {isMuted ? (
         <VolumeX className="w-5 h-5 text-white/50 group-hover:text-white transition-colors" />

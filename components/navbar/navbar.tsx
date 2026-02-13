@@ -7,11 +7,14 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 import { useEffect, useState } from "react"; // Changed to named imports
 import AnimatedLogo from "../animatedLogo";
+import { BsMenuButton } from "react-icons/bs";
+import { BsX } from "react-icons/bs";
 
 export function Navbar() {
   const router = useRouter();
   const { playClick } = useSynthClick();
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isMobileMenu, setIsMobileMenu] = useState(false);
 
   // PERFORMANCE FIX: Optimized Scroll Listener
   useEffect(() => {
@@ -40,8 +43,17 @@ export function Navbar() {
 
   const handleProjectClick = (project: string) => {
     const slug = project.toLowerCase().replace(/\s+/g, "-");
+    setIsMobileMenu(false)
     router.push(`/projects/${slug}`);
   };
+
+  useEffect(() => {
+    if (isMobileMenu) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+  }, [isMobileMenu]);
 
   const navItems = [
     { name: "Home", href: "/" },
@@ -53,6 +65,7 @@ export function Navbar() {
   ];
 
   return (
+    <>
     <header
       className={cn(
         "fixed top-0 left-0 right-0 z-50 transition-all duration-500 ease-in-out border-b will-change-transform", // will-change helps browser optimization
@@ -61,18 +74,27 @@ export function Navbar() {
           : "bg-transparent border-transparent py-8",
       )}
     >
-      <div className="w-full px-8 md:px-12 flex items-center justify-between">
+      <div className="w-full px-6 md:px-12 flex items-center justify-between">
         {/* LOGO (Left) */}
         <Link href="/" className="relative z-50 group">
           <div className="flex items-center gap-3">
-            <span className="text-white text-mono font-extrabold text-lg tracking-widest uppercase opacity-90 group-hover:opacity-100 transition-opacity">
+            <span className="text-white text-mono font-extrabold text-sm md:text-lg tracking-widest uppercase opacity-90 group-hover:opacity-100 transition-opacity">
               8Space
             </span>
-            <div className="rotate-90 h-12 w-12">
+            <div className="rotate-90 h-10 w-10 md:h-12 md:w-12">
             <AnimatedLogo/>
             </div>
           </div>
         </Link>
+
+        {/*CUSTOM NAV (Mobile) */}
+        <nav className="block md:hidden relative z-50">
+          <button onClick={() => setIsMobileMenu(!isMobileMenu)}
+             className="text-white flex items-center"
+             aria-label="Toggle Menu">
+          {isMobileMenu ? <BsX size={34}/> : <BsMenuButton size={24}/>}
+          </button>
+        </nav>
 
         {/* CUSTOM NAVIGATION (Right) */}
         <nav className="hidden md:block">
@@ -146,6 +168,47 @@ export function Navbar() {
           </ul>
         </nav>
       </div>
-    </header>
+      </header>
+
+      <div
+        className={cn(
+          "fixed top-20 right-0 bottom-0 w-full bg-black/40 backdrop-blur-xl md:hidden transition-transform duration-300 ease-out z-40 overflow-y-auto",
+          isMobileMenu ? "translate-x-0" : "translate-x-full"
+        )}
+      >
+        <ul className="flex flex-col gap-8 p-6 pt-8">
+          {navItems.map((item) => (
+            <li key={item.name} className="border-b border-white/10 pb-4">
+              {item.isDropdown ? (
+                <div className="flex flex-col gap-4">
+                  <span className="text-white text-3xl font-bold uppercase tracking-widest">
+                    {item.name}
+                  </span>
+                  <ul className="flex flex-col gap-3 pl-4">
+                    {PROJECTS.map((project) => (
+                      <li
+                        key={project}
+                        className="text-white text-md font-medium cursor-pointer hover:text-white/70 transition-colors"
+                        onClick={() => handleProjectClick(project)}
+                      >
+                        {project}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
+              ) : (
+                <Link
+                  href={item.href || "#"}
+                  className="text-white text-3xl font-bold tracking-tight uppercase hover:text-white/70 transition-colors"
+                  onClick={() => setIsMobileMenu(false)}
+                >
+                  {item.name}
+                </Link>
+              )}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </>
   );
 }

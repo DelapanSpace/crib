@@ -33,7 +33,7 @@ export function ProjectGallery({ data = [] }: ProjectGalleryProps) {
   const loopItems = [...baseItems, ...baseItems, ...baseItems, ...baseItems];
 
   return (
-    <section className="w-full py-20 overflow-hidden border-white/10">
+    <section className="w-full py-0 overflow-hidden border-white/10">
       {/* Header / Context Bar */}
       <div className="mt-12 px-6 md:px-12 mb-12 flex justify-between items-end">
         <div>
@@ -45,7 +45,7 @@ export function ProjectGallery({ data = [] }: ProjectGalleryProps) {
           </h2>
         </div>
         <div className="h-[1px] flex-1 bg-zinc-800 mx-8 mb-2 hidden md:block" />
-        <p className="text-zinc-500 font-mono text-[10px] uppercase">
+        <p className="text-zinc-500 font-mono text-[10px] uppercase hidden md:block ">
           Loop_Active: True
         </p>
       </div>
@@ -79,7 +79,7 @@ export function ProjectGallery({ data = [] }: ProjectGalleryProps) {
               "
             >
               {/* Image Layer */}
-              <div className="absolute inset-0 opacity-40 group-hover:opacity-100 transition-all duration-700 grayscale group-hover:grayscale-0">
+              <div className="absolute inset-0 opacity-100 md:opacity-40 group-hover:opacity-100 transition-all duration-700 md:grayscale group-hover:grayscale-0">
                 {item.imageUrl ? (
                   <img
                     src={item.imageUrl}
