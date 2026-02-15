@@ -23,7 +23,7 @@ export function HomeText() {
     prev,
   } = useWheelWordIndex(WORDS.length);
 
-  const [isOpen, setIsOpen] = useState(false);
+  const [manualOpen, setManualOpen] = useState(false);
   const [isDesktop, setIsDesktop] = useState(false);
   const handlePopoverScroll = (e: React.WheelEvent<HTMLDivElement>) => {
     e.stopPropagation();
@@ -46,10 +46,10 @@ export function HomeText() {
     direction.current,
   );
 
-  // Close popover if user changes the word
-  useEffect(() => {
-    if (isOpen) setIsOpen(false);
-  }, [currentIndex]);
+  // // Close popover if user changes the word
+  // useEffect(() => {
+  //   if (isOpen) setIsOpen(false);
+  // }, [currentIndex]);
 
   useEffect(() => {
     const checkDesktop = () => {
@@ -76,6 +76,8 @@ export function HomeText() {
   const currentWord = WORDS[currentIndex];
   const isProjectWord = currentWord === "PROJECTS";
 
+  const isOpen = isProjectWord && manualOpen;
+
   const handleClick = (word: string) => {
     const slug = word.toLowerCase().replace(/\s+/g, "-");
     router.push(`/${slug}`);
@@ -100,7 +102,7 @@ export function HomeText() {
           {highlightLine}
 
           {isProjectWord ? (
-            <Popover open={isOpen} onOpenChange={setIsOpen} modal={false}>
+            <Popover open={isOpen} onOpenChange={setManualOpen} modal={false}>
               <PopoverTrigger asChild>
                 <span
                   ref={currentRef}

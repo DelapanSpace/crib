@@ -1,7 +1,6 @@
 "use client";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState, useCallback} from "react";
 import { useSynthClick } from "./use-synth-click";
-
 export function useWheelWordIndex(total: number) {
   const [index, setIndex] = useState(0);
   const direction = useRef<1 | -1>(1);
@@ -9,19 +8,18 @@ export function useWheelWordIndex(total: number) {
   const { playClick } = useSynthClick();
 
   // Helper to safely change index with debounce (locking)
-  const changeIndex = (dir: 1 | -1) => {
+  const changeIndex = useCallback((dir: 1 | -1) => {
     if (locked.current) return;
-playClick()
+    playClick();
     locked.current = true;
     direction.current = dir;
 
     setIndex((i) => (dir === 1 ? (i + 1) % total : (i - 1 + total) % total));
 
-    // Lock interaction for 550ms to match animation duration
     setTimeout(() => {
       locked.current = false;
     }, 550);
-  };
+  }, [total, playClick]);
 
   useEffect(() => {
     const onWheel = (e: WheelEvent) => {
@@ -32,7 +30,7 @@ playClick()
 
     window.addEventListener("wheel", onWheel, { passive: true });
     return () => window.removeEventListener("wheel", onWheel);
-  }, [total]);
+  }, [changeIndex]);
 
   return {
     index,

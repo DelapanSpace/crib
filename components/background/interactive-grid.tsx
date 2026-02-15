@@ -2,6 +2,49 @@
 
 import { useEffect, useRef } from "react";
 
+class Point {
+  x: number;
+  y: number;
+  ox: number;
+  oy: number;
+  vx: number;
+  vy: number;
+  currentMouse: { x: number; y: number };
+
+  constructor(x: number, y: number, currentMouse: { x: number; y: number }) {
+    this.x = x;
+    this.y = y;
+    this.ox = x;
+    this.oy = y;
+    this.vx = 0;
+    this.vy = 0;
+    this.currentMouse = currentMouse; // ← passed in since it can't close over the ref
+  }
+
+  update(mouseForce: number, springStrength: number, friction: number) {
+    const dx = this.currentMouse.x - this.x;
+    const dy = this.currentMouse.y - this.y;
+    const dist = Math.sqrt(dx * dx + dy * dy);
+
+    if (dist < 200) {
+      const angle = Math.atan2(dy, dx);
+      const forceRatio = Math.pow(1 - dist / 200, 3);
+      const push = -forceRatio * mouseForce;
+      this.vx += Math.cos(angle) * push;
+      this.vy += Math.sin(angle) * push;
+    }
+
+    const returnX = this.ox - this.x;
+    const returnY = this.oy - this.y;
+    this.vx += returnX * springStrength;
+    this.vy += returnY * springStrength;
+    this.vx *= friction;
+    this.vy *= friction;
+    this.x += this.vx;
+    this.y += this.vy;
+  }
+}
+
 export function InteractiveGrid() {
   const canvasRef = useRef<HTMLCanvasElement>(null);
   
@@ -31,58 +74,6 @@ export function InteractiveGrid() {
     let cols = 0;
     let rows = 0;
 
-    class Point {
-      x: number;
-      y: number;
-      ox: number;
-      oy: number;
-      vx: number;
-      vy: number;
-
-      constructor(x: number, y: number) {
-        this.x = x;
-        this.y = y;
-        this.ox = x;
-        this.oy = y;
-        this.vx = 0;
-        this.vy = 0;
-      }
-
-      update() {
-        // Use the SMOOTHED mouse position, not the raw one
-        const dx = currentMouse.current.x - this.x;
-        const dy = currentMouse.current.y - this.y;
-        const dist = Math.sqrt(dx * dx + dy * dy);
-
-        // Gentle, Cubic Repulsion
-        // Instead of a linear push, we use a curve so it feels soft at the edges
-        if (dist < 200) {
-          const angle = Math.atan2(dy, dx);
-          
-          // Easing: (1 - dist/200)^3 gives a very soft edge
-          const forceRatio = Math.pow(1 - dist / 200, 3); 
-          const push = -forceRatio * mouseForce;
-
-          this.vx += Math.cos(angle) * push;
-          this.vy += Math.sin(angle) * push;
-        }
-
-        // Return to origin (Spring)
-        const returnX = this.ox - this.x;
-        const returnY = this.oy - this.y;
-
-        this.vx += returnX * springStrength;
-        this.vy += returnY * springStrength;
-
-        // Damping (Friction)
-        this.vx *= friction;
-        this.vy *= friction;
-        
-        this.x += this.vx;
-        this.y += this.vy;
-      }
-    }
-
     let points: Point[] = [];
 
     const init = () => {
@@ -98,7 +89,7 @@ export function InteractiveGrid() {
       for (let i = 0; i < cols * rows; i++) {
         const x = (i % cols) * spacing;
         const y = Math.floor(i / cols) * spacing;
-        points.push(new Point(x, y));
+        points.push(new Point(x, y, currentMouse.current));
       }
     };
 
@@ -111,7 +102,7 @@ export function InteractiveGrid() {
       currentMouse.current.x += (targetMouse.current.x - currentMouse.current.x) * 0.1;
       currentMouse.current.y += (targetMouse.current.y - currentMouse.current.y) * 0.1;
 
-      points.forEach((p) => p.update());
+      points.forEach((p) => p.update(mouseForce, springStrength, friction));
 
       ctx.lineWidth = 1;
 

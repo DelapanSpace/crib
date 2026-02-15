@@ -1,22 +1,34 @@
 import { urlFor } from "@/sanity/lib/image";
+import Image from "next/image";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
 
-export function AboutHero({ data }: any) {
+interface AboutHeroProps {
+  data?: {
+    heroTitle?: string;
+    heroImage?: SanityImageSource;
+  };
+}
+
+export function AboutHero({ data }: AboutHeroProps) {
   const title = data?.heroTitle || "";
   return (
     <section className="relative w-full min-h-[730px] md:min-h-screen flex flex-col justify-end pb-10 md:pb-20 px-6 md:px-12 overflow-hidden">
       {/* Background Image Layer */}
-      <div
-        className="absolute inset-0 z-0 bg-cover bg-center"
-        style={{
-          backgroundImage: data?.heroImage
-            ? `url(${urlFor(data.heroImage).width(2000).url()})`
-            : undefined,
-        }}
-      >
-        {/* Overlay to ensure text readability if needed, though design is clear */}
-        <div className="absolute inset-0 bg-black/20" />
-      </div>
-
+      {data?.heroImage && (
+        <div className="absolute inset-0 z-0">
+          <Image
+            // Remove .width(2000) - let Next.js handle the resizing
+            src={urlFor(data.heroImage).url()}
+            alt={title || "Hero Background"}
+            fill
+            priority={true} // CRITICAL: Preloads image for speed
+            className="object-cover" // Mimics 'background-size: cover'
+            sizes="100vw" // Tells browser this image is always full width
+          />
+          {/* Dark Overlay */}
+          <div className="absolute inset-0 bg-black/20" />
+        </div>
+      )}
       {/* Hero Content */}
       <div className="relative z-10 w-full">
         <h1 className="text-white text-[8vw] md:text-[10vw] leading-[0.85] font-bold tracking-tighter uppercase break-words flex flex-wrap pb-10 md:pb-0 select-none">

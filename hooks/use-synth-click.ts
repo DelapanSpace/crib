@@ -2,6 +2,10 @@
 
 import { useCallback, useRef } from "react";
 
+interface WindowWithWebkit extends Window {
+  webkitAudioContext: typeof AudioContext;
+}
+
 export function useSynthClick() {
   const audioContextRef = useRef<AudioContext | null>(null);
 
@@ -9,7 +13,7 @@ export function useSynthClick() {
     if (typeof window === "undefined") return null;
     
     if (!audioContextRef.current) {
-      const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+      const AudioContextClass = window.AudioContext || (window as unknown as WindowWithWebkit).webkitAudioContext;
       audioContextRef.current = new AudioContextClass();
     }
     

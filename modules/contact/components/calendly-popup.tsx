@@ -2,6 +2,12 @@
 
 import { useEffect, useState } from "react";
 
+interface CalendlyWindow extends Window {
+  Calendly: {
+    initPopupWidget: (options: { url: string }) => void;
+  };
+}
+
 export function CalendlyPopUp() {
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -33,8 +39,8 @@ export function CalendlyPopUp() {
     e.preventDefault();
     
     // We use (window as any) because Typescript doesn't know 'Calendly' exists globally
-    if (isLoaded && (window as any).Calendly) {
-      (window as any).Calendly.initPopupWidget({
+    if (isLoaded && (window as unknown as CalendlyWindow).Calendly) {
+      (window as unknown as CalendlyWindow).Calendly.initPopupWidget({
         url: 'https://calendly.com/team-delapanspace/30min?hide_event_type_details=1&hide_gdpr_banner=1&background_color=000000&text_color=ffffff&primary_color=ffffff' 
       });
     }

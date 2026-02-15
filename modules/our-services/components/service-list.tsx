@@ -1,9 +1,8 @@
 "use client";
 
-import { motion } from "framer-motion";
-import { ArrowLeft, ArrowRight, RotateCcw } from "lucide-react";
-import Image from "next/image";
-import { useRef, useState } from "react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
+import { useRef } from "react";
+import { ServiceCard } from "./service-card";
 
 // 1. Data Structure (Unchanged)
 const services = [
@@ -75,9 +74,6 @@ const services = [
 
 export function ServiceList() {
   const containerRef = useRef<HTMLDivElement>(null);
-  const [flippedCards, setFlippedCards] = useState<{ [key: string]: boolean }>(
-    {},
-  );
 
   // SEO Schema
   const jsonLd = {
@@ -103,14 +99,6 @@ export function ServiceList() {
         behavior: "smooth",
       });
     }
-  };
-
-  // Flip Logic
-  const handleCardClick = (id: string) => {
-    setFlippedCards((prev) => ({
-      ...prev,
-      [id]: !prev[id],
-    }));
   };
 
   return (
@@ -149,98 +137,10 @@ export function ServiceList() {
           ref={containerRef}
           className="flex w-full h-full overflow-x-auto no-scrollbar snap-x snap-mandatory px-0"
         >
-          {services.map((service) => {
-            const isFlipped = flippedCards[service.id];
-
-            return (
-              <div
-                key={service.id}
-                className="relative min-w-[100vw] md:min-w-[25vw] h-full border-r border-black/10 last:border-r-0 snap-start perspective-1000 cursor-pointer group/card"
-                onClick={() => handleCardClick(service.id)}
-              >
-                {/* INNER CARD (FLIP CONTAINER) */}
-                <motion.div
-                  className="w-full h-full relative preserve-3d"
-                  initial={false}
-                  animate={{ rotateY: isFlipped ? 180 : 0 }}
-                  transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
-                  style={{ transformStyle: "preserve-3d" }}
-                >
-                  {/* --- FRONT FACE --- */}
-                  <div className="absolute inset-0 w-full h-full backface-hidden bg-white flex flex-col justify-between p-8 overflow-hidden">
-                    {/* Background Image (Appears on Hover) */}
-                    <div className="absolute inset-0 z-0 md:opacity-0 group-hover/card:opacity-100 transition-opacity duration-500 ease-in-out">
-                      <Image
-                        src={service.src}
-                        alt={service.title}
-                        fill
-                        className="object-cover md:grayscale group-hover/card:grayscale-0 transition-all duration-1000"
-                      />
-                      {/* Dark overlay for text readability on hover */}
-                      <div className="absolute inset-0 bg-black/40" />
-                    </div>
-
-                    {/* Content (Z-10 to sit above image) */}
-                    <div className="relative z-10 w-full h-full flex flex-col items-center justify-between pointer-events-none text-white md:text-black group-hover/card:text-white transition-colors duration-300">
-                      {/* Top: Title */}
-                      <div className="w-full text-center mt-12">
-                        {/* Pill Label */}
-                        <h3 className="text-3xl font-bold uppercase tracking-tighter leading-none break-words">
-                          {service.title}
-                        </h3>
-                      </div>
-
-                      {/* Center: Massive Number */}
-                      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2">
-                        <span className="text-[180px] md:text-[220px] font-thin leading-none tracking-tighter opacity-100 font-sans">
-                          {parseInt(service.id)}
-                        </span>
-                      </div>
-
-                      {/* Bottom Left: Tags */}
-                      <div className="w-full flex justify-between items-end">
-                        <div className="border md:border-black group-hover/card:border-white px-4 py-2 rounded-full uppercase text-xs font-medium tracking-wide">
-                          {service.tags.split(",")[0]}
-                        </div>
-
-                        {/* Flip Indicator */}
-                        <div className="w-10 h-10 rounded-full border md:border-black/20 group-hover/card:border-white/50 flex items-center justify-center">
-                          <RotateCcw size={14} />
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* --- BACK FACE (DESCRIPTION) --- */}
-                  <div
-                    className="absolute inset-0 w-full h-full backface-hidden text-white p-10 flex flex-col items-center justify-center text-center"
-                    style={{ transform: "rotateY(180deg)" }}
-                  >
-                    <span className="text-sm font-mono text-zinc-500 mb-6">
-                      {service.id} — DESCRIPTION
-                    </span>
-                    <h4 className="text-2xl font-bold uppercase mb-6 tracking-tight">
-                      {service.title}
-                    </h4>
-                    <p className="text-lg md:text-xl leading-relaxed text-zinc-300 max-w-sm">
-                      {service.description}
-                    </p>
-
-                    <div className="mt-12">
-                      <p className="text-xs uppercase tracking-widest text-zinc-500 mb-2">
-                        Capabilities
-                      </p>
-                      <p className="text-sm">{service.tags}</p>
-                    </div>
-
-                    <button className="mt-auto flex items-center gap-2 text-xs uppercase tracking-widest border-b border-white/30 pb-1 hover:border-white transition-colors">
-                      Click to flip back
-                    </button>
-                  </div>
-                </motion.div>
-              </div>
-            );
-          })}
+          {services.map((service) => (
+            // Render the isolated component
+            <ServiceCard key={service.id} data={service} />
+          ))}
         </div>
       </div>
 
@@ -252,7 +152,7 @@ export function ServiceList() {
         .backface-hidden {
           backface-visibility: hidden;
           -webkit-backface-visibility: hidden;
-        transform: translateZ(0);
+          transform: translateZ(0);
         }
         .perspective-1000 {
           perspective: 1000px;
