@@ -20,7 +20,7 @@ export function ProjectsList() {
       style={{ maxHeight }}
     >
       <ul className="flex flex-col gap-1">
-        {PROJECTS.map((project, i) => (
+        {PROJECTS.map((project) => (
           <li
             key={project}
             className="group flex items-center justify-between p-3 rounded-md hover:bg-white/10 cursor-pointer transition-colors min-h-[44px]"

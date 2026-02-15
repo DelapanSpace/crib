@@ -8,7 +8,7 @@ export async function generateStaticParams() {
   const projects = await client.fetch(groq`*[_type == "project"]{ "slug": slug.current }`);
 
   // Return an array of objects: [{ slug: 'project-1' }, { slug: 'project-2' }]
-  return projects.map((project: any) => ({
+  return projects.map((project: { slug: string }) => ({
     slug: project.slug,
   }));
 }

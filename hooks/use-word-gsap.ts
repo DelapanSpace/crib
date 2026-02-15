@@ -13,8 +13,9 @@ export function useWordGsap(
   index: number,
   direction: 1 | -1
 ) {
+  const { prev, current, next } = refs;
+
   useEffect(() => {
-    const { prev, current, next } = refs;
     if (!prev.current || !current.current || !next.current) return;
 
     const travel = 22 * direction;
@@ -64,5 +65,5 @@ export function useWordGsap(
     return () => {
       tl.kill();
     };
-  }, [index, direction]);
+  }, [index, direction, prev, current, next]);
 }

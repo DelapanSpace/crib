@@ -1,4 +1,3 @@
-import { SpaceAudio } from "@/components/background/space-audio";
 import { BackgroundLayer } from "@/components/background/background-layer";
 import { HomeText } from "../components/home-text";
 import { WORDS } from "../utils";

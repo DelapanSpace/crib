@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   },
   description: 
     "A production-focused creative studio specializing in social media management, brand design, and high-end digital experiences for global agencies and businesses.",
-  metadataBase: new URL("https://delapan.space"), // Update with your actual URL
+  metadataBase: new URL("https://dlpn.space"), // Update with your actual URL
   alternates: {
     canonical: "/",
   },

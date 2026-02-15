@@ -4,15 +4,11 @@ export const projectQuery = groq`
   *[_type == "project" && slug.current == $slug][0]{
     title,
     "slug": slug.current,
-    "heroImage": heroImage.asset->url,
+    heroImage,
     services,
     section1,
     section2,
     // Fetch gallery images properly
-    gallery[]{
-      title,
-      "imageUrl": image.asset->url
-    },
     process,
     impact[]{
       value,

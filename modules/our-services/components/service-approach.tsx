@@ -10,6 +10,7 @@ import {
 } from "lucide-react";
 import { TiltCard } from "./utils";
 
+
 const principles = [
   {
     id: "01",

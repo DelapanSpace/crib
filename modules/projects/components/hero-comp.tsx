@@ -1,0 +1,76 @@
+import { urlFor } from "@/sanity/lib/image";
+import { SanityImageSource } from "@sanity/image-url/lib/types/types";
+import Image from "next/image";
+interface ProjectHeroProps {
+  title: string;
+  services: string[];
+  heroImage?: SanityImageSource;
+}
+
+export function HeroComp({ title, services, heroImage }: ProjectHeroProps) {
+  return (
+    <section className="relative w-full h-screen overflow-hidden text-white">
+      {/* 1. Background Image Layer */}
+      <div className="absolute inset-0 z-0">
+        {heroImage ? (
+          <Image
+            src={urlFor(heroImage).width(1920).quality(80).format("webp").url()}
+            alt={title}
+            fill
+            priority
+            unoptimized
+            sizes="100vw"
+            className="object-cover opacity-90"
+          />
+        ) : (
+          <div className="w-full h-full bg-zinc-900 flex items-center justify-center">
+            <span className="text-zinc-700 font-mono uppercase tracking-widest">
+              Image Placeholder
+            </span>
+          </div>
+        )}
+        {/* Overlay for text readability */}
+        <div className="absolute inset-0 bg-black/30" />
+      </div>
+
+      {/* 3. Main Title (Centered) */}
+      <div className="relative z-20 w-full h-full flex flex-col items-center justify-center px-4">
+        <h1 className="text-[12vw] md:text-[10vw] font-bold uppercase tracking-tighter leading-[0.8] text-center select-none mix-blend-overlay opacity-90 flex flex-wrap justify-center">
+          {title.split(" ").map((word, i) => (
+            // Wrap each word to keep characters together
+            <span key={i} className="whitespace-nowrap">
+              {word.split("").map((char, j) => (
+                <span
+                  key={j}
+                  // The hover effect: White -> Black
+                  className="inline-block hover:text-black transition-colors duration-[600ms] ease-out cursor-default"
+                >
+                  {char}
+                </span>
+              ))}
+              {/* Non-breaking space to maintain gaps between words */}
+              <span className="inline-block">&nbsp;</span>
+            </span>
+          ))}
+        </h1>
+      </div>
+
+      {/* 4. Services List (Bottom Left) */}
+      <div className="absolute bottom-12 left-6 md:bottom-16 md:left-12 z-20">
+        <h3 className="text-xs font-mono uppercase text-white/60 mb-4 tracking-widest">
+          Services
+        </h3>
+        <ul className="flex flex-col gap-1">
+          {services.map((service, i) => (
+            <li
+              key={i}
+              className="text-lg md:text-xl font-medium tracking-tight text-white"
+            >
+              {service}
+            </li>
+          ))}
+        </ul>
+      </div>
+    </section>
+  );
+}

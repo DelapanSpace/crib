@@ -3,6 +3,10 @@
 import { useEffect, useRef, useState } from "react";
 import { Volume2, VolumeX } from "lucide-react";
 
+interface WindowWithWebkit extends Window {
+  webkitAudioContext: typeof AudioContext;
+}
+
 export function SpaceAudio() {
   const [isMuted, setIsMuted] = useState(true);
   const audioContextRef = useRef<AudioContext | null>(null);
@@ -17,7 +21,7 @@ export function SpaceAudio() {
   // 1. Initialize Audio Context
   const initAudio = () => {
     if (!audioContextRef.current) {
-      const AudioContextClass = window.AudioContext || (window as any).webkitAudioContext;
+      const AudioContextClass = window.AudioContext || (window as unknown as WindowWithWebkit).webkitAudioContext;
       audioContextRef.current = new AudioContextClass();
     }
     return audioContextRef.current;
@@ -137,7 +141,7 @@ export function SpaceAudio() {
         try {
           nodesRef.current.osc1.stop();
           nodesRef.current.osc2?.stop();
-        } catch (e) {}
+        } catch {}
       }
       if (audioContextRef.current) {
         audioContextRef.current.close();
